@@ -5,7 +5,7 @@
 	let currentTeamClass = "team-a";
 	let currentTeamName = "Team A";
 
-	const drawAnotherCard = () => {
+	const drawCard = () => {
 		currentCard = deck.drawCard();
 	};
 
@@ -20,8 +20,28 @@
 	};
 
 	const switchTeamAndDraw = () => {
+		gtag("event", "draw", {
+			event_category: "card",
+			event_label: currentCard,
+		});
 		switchTeam();
-		drawAnotherCard();
+		drawCard();
+	};
+
+	const skip = () => {
+		gtag("event", "skip", {
+			event_category: "card",
+			event_label: currentCard,
+		});
+		drawCard();
+	};
+
+	const draw = () => {
+		gtag("event", "draw", {
+			event_category: "card",
+			event_label: currentCard,
+		});
+		drawCard();
 	};
 	let playingWithTeams = true;
 </script>
@@ -83,9 +103,7 @@
 	<div class="flex-center">
 		<div class="card flex-center">{currentCard}</div>
 		{#if playingWithTeams}
-			<button class="lolbutton" on:click={drawAnotherCard}>skip</button>
-		{:else}
-			<button class="lolbutton" on:click={drawAnotherCard}>draw</button>
-		{/if}
+			<button class="lolbutton" on:click={skip}>skip</button>
+		{:else}<button class="lolbutton" on:click={draw}>draw</button>{/if}
 	</div>
 </div>
