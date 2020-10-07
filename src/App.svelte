@@ -23,6 +23,7 @@
 		switchTeam();
 		drawAnotherCard();
 	};
+	let playingWithTeams = true;
 </script>
 
 <style>
@@ -73,12 +74,18 @@
 
 <div class="app">
 	<div class="flex-center">
-		<div class="team {currentTeamClass}">{currentTeamName}</div>
-		<button class="lolbutton" on:click={switchTeamAndDraw}>switch team and
-			draw</button>
+		{#if playingWithTeams}
+			<div class="team {currentTeamClass}">{currentTeamName}</div>
+			<button class="lolbutton" on:click={switchTeamAndDraw}>switch team
+				and draw</button>
+		{/if}
 	</div>
 	<div class="flex-center">
 		<div class="card flex-center">{currentCard}</div>
-		<button class="lolbutton" on:click={drawAnotherCard}>skip</button>
+		{#if playingWithTeams}
+			<button class="lolbutton" on:click={drawAnotherCard}>skip</button>
+		{:else}
+			<button class="lolbutton" on:click={drawAnotherCard}>draw</button>
+		{/if}
 	</div>
 </div>
