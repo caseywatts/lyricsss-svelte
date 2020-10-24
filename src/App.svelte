@@ -79,10 +79,11 @@
 		border-radius: 0.5rem;
 		border: 1px solid black;
 	}
-	.team {
-		padding: 2rem;
-		margin: 2rem;
+	.team-who-drew {
+		padding: 0.2rem;
+		margin: 0.2rem;
 		border-radius: 0.5rem;
+		display: inline-block;
 	}
 	.team-a {
 		background: violet;
@@ -95,12 +96,19 @@
 <div class="app">
 	{#if playingWithTeams}
 		<div class="flex-center">
-			<div class="team {currentTeamClass}">{currentTeamName}</div>
 			<button class="lolbutton" on:click={switchTeamAndDraw}>switch team
 				and draw</button>
 		</div>
 		<div class="flex-center">
-			<div class="card flex-center">{currentCard}</div>
+			<div class="team-who-drew {currentTeamClass}">
+				{currentTeamName}
+				drew
+			</div>
+		</div>
+		<div class="flex-center">
+			<div class="card flex-center">
+				<div class="">{currentCard}</div>
+			</div>
 			<button class="lolbutton" on:click={skip}>skip</button>
 		</div>
 	{:else}
