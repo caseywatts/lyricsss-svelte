@@ -1,31 +1,40 @@
 <script>
 	import { deck } from "./deck.js";
+	import SingingTeamIndicator from "./SingingTeamIndicator.svelte";
 
 	let currentCard = deck.drawCard();
 	let currentTeamClass = "team-a-background";
-	let currentTeamName = "Team A";
+	export let activeTeam = "A";
 
 	const drawCard = () => {
 		currentCard = deck.drawCard();
 	};
 
-	const switchTeam = () => {
+	const switchSingingTeamUI = () => {
 		if (currentTeamClass === "team-a-background") {
 			currentTeamClass = "team-b-background";
-			currentTeamName = "Team B";
+			activeTeam = "B";
 		} else {
 			currentTeamClass = "team-a-background";
-			currentTeamName = "Team A";
+			activeTeam = "A";
 		}
 	};
 
-	const switchTeamAndDraw = () => {
+	const switchDrawingTeam = () => {
 		gtag("event", "draw", {
 			event_category: "card",
 			event_label: currentCard,
 		});
-		switchTeam();
+		switchSingingTeam();
 		drawCard();
+	};
+
+	const switchSingingTeam = () => {
+		gtag("event", "draw", {
+			event_category: "card",
+			event_label: currentCard,
+		});
+		switchSingingTeamUI();
 	};
 
 	const skip = () => {
@@ -79,12 +88,6 @@
 		border-radius: 0.5rem;
 		border: 1px solid black;
 	}
-	.team-who-drew {
-		padding: 0.2rem;
-		margin: 0.2rem;
-		border-radius: 0.5rem;
-		display: inline-block;
-	}
 	.team-a {
 		background: violet;
 	}
@@ -126,20 +129,20 @@
 <div class="app {currentTeamClass}">
 	{#if playingWithTeams}
 		<div class="flex-center">
-			<button class="lolbutton" on:click={switchTeamAndDraw}>switch team
-				and draw</button>
+			<button class="lolbutton" on:click={switchDrawingTeam}>
+				switch team and draw
+			</button>
 		</div>
 		<div class="flex-center">
-			<div class="team-who-drew {currentTeamClass}">
-				{currentTeamName}
-				drew
-			</div>
+			<SingingTeamIndicator team="A" {activeTeam} />
+			<SingingTeamIndicator team="B" {activeTeam} />
 		</div>
 		<div class="flex-center">
 			<div class="card flex-center">
 				<div class="">{currentCard}</div>
 			</div>
 			<button class="lolbutton" on:click={skip}>skip</button>
+			<button class="lolbutton" on:click={switchSingingTeam}>switch team</button>
 		</div>
 	{:else}
 		<div class="flex-center" />
