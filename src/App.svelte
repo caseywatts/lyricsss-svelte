@@ -2,7 +2,7 @@
 	import { deck } from "./deck.js";
 
 	let currentCard = deck.drawCard();
-	let currentTeamClass = "team-a";
+	let currentTeamClass = "team-a-background";
 	let currentTeamName = "Team A";
 
 	const drawCard = () => {
@@ -10,11 +10,11 @@
 	};
 
 	const switchTeam = () => {
-		if (currentTeamClass === "team-a") {
-			currentTeamClass = "team-b";
+		if (currentTeamClass === "team-a-background") {
+			currentTeamClass = "team-b-background";
 			currentTeamName = "Team B";
 		} else {
-			currentTeamClass = "team-a";
+			currentTeamClass = "team-a-background";
 			currentTeamName = "Team A";
 		}
 	};
@@ -91,9 +91,39 @@
 	.team-b {
 		background: skyblue;
 	}
+	.team-a-background {
+		background: linear-gradient(63deg, #b2e6c9 23%, transparent 23%) 7px 0,
+			linear-gradient(63deg, transparent 74%, #b2e6c9 78%),
+			linear-gradient(
+				63deg,
+				transparent 34%,
+				#b2e6c9 38%,
+				#b2e6c9 58%,
+				transparent 62%
+			),
+			#92c6a9;
+		background-size: 16px 48px;
+	}
+
+	.team-b-background {
+		background: linear-gradient(153deg, #cdb2e6 23%, transparent 23%) 7px 0,
+			linear-gradient(153deg, transparent 74%, #cdb2e6 78%),
+			linear-gradient(
+				153deg,
+				transparent 34%,
+				#cdb2e6 38%,
+				#cdb2e6 58%,
+				transparent 62%
+			),
+			#e2c4ff;
+		background-size: 16px 48px;
+	}
+	.app {
+		min-height: 100vh;
+	}
 </style>
 
-<div class="app">
+<div class="app {currentTeamClass}">
 	{#if playingWithTeams}
 		<div class="flex-center">
 			<button class="lolbutton" on:click={switchTeamAndDraw}>switch team
