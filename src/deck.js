@@ -1,5 +1,3 @@
-import { init } from "svelte/internal";
-import { draw } from "svelte/types/runtime/transition";
 import initial_deck from "./pruned650words.json";
 
 class Deck {

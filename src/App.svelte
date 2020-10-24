@@ -93,17 +93,21 @@
 </style>
 
 <div class="app">
-	<div class="flex-center">
-		{#if playingWithTeams}
+	{#if playingWithTeams}
+		<div class="flex-center">
 			<div class="team {currentTeamClass}">{currentTeamName}</div>
 			<button class="lolbutton" on:click={switchTeamAndDraw}>switch team
 				and draw</button>
-		{/if}
-	</div>
-	<div class="flex-center">
-		<div class="card flex-center">{currentCard}</div>
-		{#if playingWithTeams}
+		</div>
+		<div class="flex-center">
+			<div class="card flex-center">{currentCard}</div>
 			<button class="lolbutton" on:click={skip}>skip</button>
-		{:else}<button class="lolbutton" on:click={draw}>draw</button>{/if}
-	</div>
+		</div>
+	{:else}
+		<div class="flex-center" />
+		<div class="flex-center">
+			<div class="card flex-center">{currentCard}</div>
+			<button class="lolbutton" on:click={draw}>draw</button>
+		</div>
+	{/if}
 </div>
